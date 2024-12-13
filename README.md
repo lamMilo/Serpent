@@ -24,7 +24,7 @@ A simple SSHv2 Client written in Python with Paramiko
 
 |   Important Notes     |      |
 |--------------|-----------|
-| SSHv2 | [**This tool only supports SSHv2 connections|
-| Passwords | [Passwords are displayed as asterisks in the password field. |
-| Passwords in Session | [**If the system prompts for a password, it will not be shown as asterisks. |
-| Copy & Paste | [Once connected, any input in the terminal will be sent to the target system. Note that only one command can be sent at a time. Multiple commands cannot be executed in a single input.|
+| SSHv2 | This tool only supports SSHv2 connections|
+| Passwords | Passwords are displayed as asterisks in the password field. |
+| Passwords in Session | If the system prompts for a password, it will not be shown as asterisks. |
+| Copy & Paste | Once connected, any input in the terminal will be sent to the target system. Note that only one command can be sent at a time. Multiple commands cannot be executed in a single input.|
