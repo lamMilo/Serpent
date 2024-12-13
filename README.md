@@ -1,4 +1,4 @@
-# SSH Connection Tool
+# Serpent SSH Tool
 
 A simple Python tool to establish an SSH connection using Paramiko.
 
@@ -18,7 +18,8 @@ You can install the required dependencies with:
 
 ```bash
 pip install PyQt5 paramiko
-Description
+```bash
+
 This tool leverages Paramiko, a Python library for SSHv2, to establish SSH connections. While Netmiko is also available for network devices, Paramiko is used here for a more general SSH connection.
 
 How to Use
@@ -36,5 +37,3 @@ No license specified. Please add a license if applicable.
 
 vbnet
 Code kopieren
-
-Feel free to copy and paste it! Let me know if you need further adjustments.
