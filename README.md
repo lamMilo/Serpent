@@ -15,8 +15,8 @@ A simple SSHv2 Client written in Python with Paramiko
 
 | Package | Link |
 |--------------|-----------|
-| Paramiko | [**Download**](pip install paramiko)
-| PyQt5    | [**Download** ](pip install PyQt5)
+| Paramiko | [**Download**](https://www.paramiko.org/installing.html)
+| PyQt5    | [**Download** ](https://pypi.org/project/PyQt5/#:~:text=PyQt5%20is%20a%20comprehensive%20set,platforms%20including%20iOS%20and%20Android.)
 | Python 3.7 or higher| [**Download** ](https://www.python.org/downloads/)
 
 
