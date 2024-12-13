@@ -20,7 +20,7 @@ A simple SSHv2 Client written in Python with Paramiko
 | Python 3.7 or higher| [**Download** ](https://www.python.org/downloads/)
 
 
-### Kernel.
+### Notes.
 
 |   Important Notes     |      |
 |--------------|-----------|
