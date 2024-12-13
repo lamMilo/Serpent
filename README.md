@@ -1,30 +1,40 @@
-SSH Connection Tool
+# SSH Connection Tool
+
 A simple Python tool to establish an SSH connection using Paramiko.
 
-Requirements
-PyQt5
-Python 3.7 or higher
-Paramiko library for SSHv2 connections
-To install the required dependencies, run:
+---
 
-bash
-Code kopieren
+## Requirements
+
+### Dependencies
+
+To run this tool, ensure you have the following installed:
+
+- **PyQt5**
+- **Python 3.7 or higher**
+- **Paramiko** (for SSHv2 connections)
+
+You can install the required dependencies with:
+
+```bash
 pip install PyQt5 paramiko
 Description
-This tool uses Paramiko, a Python library for SSHv2, to establish SSH connections. Netmiko is another library for network devices, but Paramiko is used here.
+This tool leverages Paramiko, a Python library for SSHv2, to establish SSH connections. While Netmiko is also available for network devices, Paramiko is used here for a more general SSH connection.
 
-How to use the tool:
-
-Host IP Address: Enter the host IP address of the system you want to connect to.
+How to Use
+Host IP Address: Enter the IP address of the system you want to connect to.
 Username: Enter the username for SSH login.
-Password: Enter the password. The password will be replaced by asterisks (*) for added privacy.
+Password: Enter the password (it will be replaced with asterisks for privacy).
 Connect: Press the Connect button to establish the SSH connection.
-Important Notes:
-
-Only SSHv2 connections will work.
-Passwords are shown as asterisks (*) in the password field.
-If prompted for a password by the system, it will not be displayed as asterisks.
-Once connected, any input in the bottom line will be sent to the target system. Only one command can be sent at a time. You cannot send multiple commands in sequence in one input.
-
+Important Notes
+This tool only supports SSHv2 connections.
+Passwords are displayed as asterisks in the password field.
+If the system prompts for a password, it will not be shown as asterisks.
+Once connected, any input in the terminal will be sent to the target system. Note that only one command can be sent at a time. Multiple commands cannot be executed in a single input.
 License
 No license specified. Please add a license if applicable.
+
+vbnet
+Code kopieren
+
+Feel free to copy and paste it! Let me know if you need further adjustments.
