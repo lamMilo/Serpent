@@ -1,34 +1,30 @@
-# Serpent SSH Tool
+<p align="center"><img src="https://fadedhd.xyz/IMG/Github/Serpentv2.png"...></p>
 
-A simple Python tool to establish an SSH connection using Paramiko.
+<h1 align="center">
+Serpent SSH Client
+</h1>
+<h2 align="center">
+A simple SSHv2 Client written in Python with Paramiko
+</h2>
 
----
+------
 
-## Requirements
+# What you need.
 
-### Dependencies
+## pip Packages
 
-To run this tool, ensure you have the following installed:
+| Package | Link |
+|--------------|-----------|
+| Paramiko | [**Download**](pip install paramiko)
+| PyQt5    | [**Download** ](pip install PyQt5)
+| Python 3.7 or higher| [**Download** ](https://www.python.org/downloads/)
 
-- **PyQt5**
-- **Python 3.7 or higher**
-- **Paramiko** (for SSHv2 connections)
 
-You can install the required dependencies with:
+### Kernel.
 
-```bash
-pip install PyQt5 paramiko
-Description
-This tool leverages Paramiko, a Python library for SSHv2, to establish SSH connections. While Netmiko is also available for network devices, Paramiko is used here for a more general SSH connection.
-
-How to Use
-Host IP Address: Enter the IP address of the system you want to connect to.
-Username: Enter the username for SSH login.
-Password: Enter the password (it will be replaced with asterisks for privacy).
-Connect: Press the Connect button to establish the SSH connection.
-Important Notes
-This tool only supports SSHv2 connections.
-Passwords are displayed as asterisks in the password field.
-If the system prompts for a password, it will not be shown as asterisks.
-Once connected, any input in the terminal will be sent to the target system. Note that only one command can be sent at a time. Multiple commands cannot be executed in a single input.
-License
+|   Important Notes     |      |
+|--------------|-----------|
+| SSHv2 | [**This tool only supports SSHv2 connections|
+| Passwords | [Passwords are displayed as asterisks in the password field. |
+| Passwords in Session | [**If the system prompts for a password, it will not be shown as asterisks. |
+| Copy & Paste | [Once connected, any input in the terminal will be sent to the target system. Note that only one command can be sent at a time. Multiple commands cannot be executed in a single input.|
