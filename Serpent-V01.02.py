@@ -1,6 +1,6 @@
 __author__ = "Milo"
 __copyright__ = "Copyright 2024, lamMilo"
-__email__ = "admin@fflcd.cloud"
+__email__ = "admin@ffcld.cloud"
 
 from PyQt5 import QtWidgets, QtGui, QtCore
 import paramiko
