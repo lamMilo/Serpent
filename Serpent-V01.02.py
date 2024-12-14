@@ -1,3 +1,7 @@
+__author__ = "Milo"
+__copyright__ = "Copyright 2024, lamMilo"
+__email__ = "admin@fflcd.cloud"
+
 from PyQt5 import QtWidgets, QtGui, QtCore
 import paramiko
 import threading
@@ -132,21 +136,38 @@ class SSHClientApp(QtWidgets.QWidget):
             self.receive_thread.start()
 
             self.output_area.append("Connected to the server.")
+        except paramiko.AuthenticationException:
+            self.output_area.append("Authentication failed. Please check your credentials.")
+        except paramiko.SSHException as e:
+            self.output_area.append(f"SSH error: {e}")
         except Exception as e:
             self.output_area.append(f"An error occurred: {e}")
 
     def send_command(self):
+        if not self.channel or not self.channel.active:
+            self.output_area.append("Connection lost. Please reconnect.")
+            return
+
         command = self.command_entry.text() + "\n"
-        if self.channel is not None:
-            self.channel.send(command)
-            self.command_entry.clear()
+        self.channel.send(command)
+        self.command_entry.clear()
+        self.output_area.append(f"Command sent: {command.strip()}")
 
     def receive_output(self):
         while True:
             if self.channel.recv_ready():
                 output = self.channel.recv(1024).decode('utf-8')
-                self.output_area.append(output)
-                self.output_area.moveCursor(QtGui.QTextCursor.End)
+                QtCore.QMetaObject.invokeMethod(
+                    self.output_area,
+                    "append",
+                    QtCore.Qt.QueuedConnection,
+                    QtCore.Q_ARG(str, output)
+                )
+
+    def closeEvent(self, event):
+        if self.ssh:
+            self.ssh.close()
+        event.accept()
 
 
 if __name__ == "__main__":
