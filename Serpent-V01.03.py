@@ -6,9 +6,13 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 import paramiko
 import threading
 import sys
+import json
+import os
 
 
 class SSHClientApp(QtWidgets.QWidget):
+    PROFILE_FILE = "profiles.json"
+
     def __init__(self):
         super().__init__()
 
@@ -16,6 +20,10 @@ class SSHClientApp(QtWidgets.QWidget):
 
         self.ssh = None
         self.channel = None
+
+        # Load profiles
+        self.profiles = self.load_profiles()
+        self.populate_profiles()
 
         # Themes
         self.light_theme = {
@@ -38,11 +46,25 @@ class SSHClientApp(QtWidgets.QWidget):
         self.apply_theme()
 
     def init_ui(self):
-        self.setWindowTitle("Serpent-V01.01")
+        self.setWindowTitle("Serpent-V01.03")
         self.setGeometry(200, 200, 800, 600)
 
         # Layouts
         main_layout = QtWidgets.QVBoxLayout()
+
+        # Profile Management
+        profile_layout = QtWidgets.QHBoxLayout()
+        self.profile_selector = QtWidgets.QComboBox()
+        self.load_button = QtWidgets.QPushButton("Load Profile")
+        self.save_button = QtWidgets.QPushButton("Save Profile")
+        self.delete_button = QtWidgets.QPushButton("Delete Profile")
+        self.load_button.clicked.connect(self.load_profile)
+        self.save_button.clicked.connect(self.save_profile)
+        self.delete_button.clicked.connect(self.delete_profile)
+        profile_layout.addWidget(self.profile_selector)
+        profile_layout.addWidget(self.load_button)
+        profile_layout.addWidget(self.save_button)
+        profile_layout.addWidget(self.delete_button)
 
         # Host Input
         host_layout = QtWidgets.QHBoxLayout()
@@ -89,6 +111,7 @@ class SSHClientApp(QtWidgets.QWidget):
         command_layout.addWidget(self.command_button)
 
         # Add Widgets to Layout
+        main_layout.addLayout(profile_layout)
         main_layout.addLayout(host_layout)
         main_layout.addLayout(username_layout)
         main_layout.addLayout(password_layout)
@@ -118,6 +141,53 @@ class SSHClientApp(QtWidgets.QWidget):
         else:
             self.current_theme = self.light_theme
         self.apply_theme()
+
+    def load_profiles(self):
+        if not os.path.exists(self.PROFILE_FILE):
+            return {}
+        with open(self.PROFILE_FILE, "r") as file:
+            return json.load(file)
+
+    def save_profiles(self):
+        with open(self.PROFILE_FILE, "w") as file:
+            json.dump(self.profiles, file, indent=4)
+
+    def populate_profiles(self):
+        self.profile_selector.clear()
+        self.profile_selector.addItems(self.profiles.keys())
+
+    def save_profile(self):
+        name, ok = QtWidgets.QInputDialog.getText(self, "Save Profile", "Profile Name:")
+        if ok and name:
+            self.profiles[name] = {
+                "host": self.host_entry.text(),
+                "username": self.username_entry.text(),
+                "password": self.password_entry.text()
+            }
+            self.save_profiles()
+            self.populate_profiles()
+            self.output_area.append(f"Profile '{name}' saved.")
+
+    def load_profile(self):
+        selected = self.profile_selector.currentText()
+        if selected in self.profiles:
+            profile = self.profiles[selected]
+            self.host_entry.setText(profile["host"])
+            self.username_entry.setText(profile["username"])
+            self.password_entry.setText(profile["password"])
+            self.output_area.append(f"Profile '{selected}' loaded.")
+        else:
+            self.output_area.append("No profile selected or profile not found.")
+
+    def delete_profile(self):
+        selected = self.profile_selector.currentText()
+        if selected in self.profiles:
+            del self.profiles[selected]
+            self.save_profiles()
+            self.populate_profiles()
+            self.output_area.append(f"Profile '{selected}' deleted.")
+        else:
+            self.output_area.append("No profile selected or profile not found.")
 
     def connect(self):
         try:
