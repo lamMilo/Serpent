@@ -1,4 +1,4 @@
-<p align="center"><img src="https://fadedhd.xyz/IMG/Github/Serpentv2.png"...></p>
+<p align="center"><img src="https://fadedhd.xyz/IMG/Github/LamMilo/Serpentv2.png"...></p>
 
 <h1 align="center">
 Serpent SSH Client
