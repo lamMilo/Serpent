@@ -27,6 +27,7 @@ class SSHClientApp(QtWidgets.QWidget):
 
         # Themes
         self.light_theme = {
+            "name": "Light Theme",
             "bg_color": "#ffffff",
             "fg_color": "#000000",
             "entry_bg": "#ffffff",
@@ -35,6 +36,7 @@ class SSHClientApp(QtWidgets.QWidget):
             "button_fg": "#000000",
         }
         self.dark_theme = {
+            "name": "Dark Theme",
             "bg_color": "#2e2e2e",
             "fg_color": "#ffffff",
             "entry_bg": "#3c3c3c",
@@ -42,11 +44,36 @@ class SSHClientApp(QtWidgets.QWidget):
             "button_bg": "#5a5a5a",
             "button_fg": "#ffffff",
         }
-        self.current_theme = self.light_theme
+        self.blue_theme = {
+            "name": "Blue Theme",
+            "bg_color": "#e6f7ff",
+            "fg_color": "#003366",
+            "entry_bg": "#cceeff",
+            "entry_fg": "#003366",
+            "button_bg": "#80bfff",
+            "button_fg": "#ffffff",
+        }
+        self.green_theme = {
+            "name": "Green Theme",
+            "bg_color": "#e6ffe6",
+            "fg_color": "#004d00",
+            "entry_bg": "#ccffcc",
+            "entry_fg": "#004d00",
+            "button_bg": "#66cc66",
+            "button_fg": "#ffffff",
+        }
+
+        self.themes = [
+            self.light_theme,
+            self.dark_theme,
+            self.blue_theme,
+            self.green_theme,
+        ]
+        self.current_theme_index = 0
         self.apply_theme()
 
     def init_ui(self):
-        self.setWindowTitle("Serpent-V01.03")
+        self.setWindowTitle("Serpent-V01.04")
         self.setGeometry(200, 200, 800, 600)
 
         # Layouts
@@ -123,7 +150,7 @@ class SSHClientApp(QtWidgets.QWidget):
         self.setLayout(main_layout)
 
     def apply_theme(self):
-        theme = self.current_theme
+        theme = self.themes[self.current_theme_index]
 
         self.setStyleSheet(f"background-color: {theme['bg_color']}; color: {theme['fg_color']};")
         self.output_area.setStyleSheet(f"background-color: {theme['entry_bg']}; color: {theme['entry_fg']};")
@@ -136,10 +163,9 @@ class SSHClientApp(QtWidgets.QWidget):
         self.command_button.setStyleSheet(f"background-color: {theme['button_bg']}; color: {theme['button_fg']};")
 
     def toggle_theme(self):
-        if self.current_theme == self.light_theme:
-            self.current_theme = self.dark_theme
-        else:
-            self.current_theme = self.light_theme
+        self.current_theme_index = (self.current_theme_index + 1) % len(self.themes)
+        theme_name = self.themes[self.current_theme_index]["name"]
+        self.output_area.append(f"Theme switched to {theme_name}.")
         self.apply_theme()
 
     def load_profiles(self):
