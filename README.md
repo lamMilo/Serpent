@@ -47,8 +47,8 @@ pip install paramiko PyQt5
 Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/SerpentSSH.git
-cd SerpentSSH
+git clone https://github.com/lamMilo/Serpent
+cd Serpent
 ```
 
 Run the SSH client:
